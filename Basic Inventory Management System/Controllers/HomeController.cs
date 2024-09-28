@@ -1,6 +1,7 @@
 using Basic_Inventory_Management_System.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
@@ -13,6 +14,7 @@ namespace Basic_Inventory_Management_System.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
