@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ServicesLayer.IService;
+using ServicesLayer.IService.Auth;
 
 namespace Basic_Inventory_Management_System.Controllers.Auth
 {

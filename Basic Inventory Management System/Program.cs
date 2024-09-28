@@ -3,8 +3,8 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.IRepository.Auth;
 using DataAccessLayer.Repository.Auth;
-using ServicesLayer.IService;
-using ServicesLayer.Service;
+using ServicesLayer.IService.Auth;
+using ServicesLayer.Service.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 

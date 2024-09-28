@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DataAccessLayer.IRepository.Auth;
 using DataAccessLayer.ViewModels.Auth.Account;
-using ServicesLayer.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServicesLayer.IService.Auth;
 
-namespace ServicesLayer.Service
+namespace ServicesLayer.Service.Auth
 {
     public class AccountService : IAccountService
     {
@@ -24,7 +24,7 @@ namespace ServicesLayer.Service
 
         public async Task<IdentityResult> RegisterUserAsync(RegisterUser model)
         {
-            var user = new Microsoft.AspNetCore.Identity.IdentityUser
+            var user = new IdentityUser
             {
                 UserName = model.Email,
                 Email = model.Email
