@@ -3,6 +3,8 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.IRepository.Auth;
 using DataAccessLayer.Repository.Auth;
+using ServicesLayer.IService;
+using ServicesLayer.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddDbContext<IMSDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
+
+
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 

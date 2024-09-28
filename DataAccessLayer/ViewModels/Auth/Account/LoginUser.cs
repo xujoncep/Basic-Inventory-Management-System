@@ -11,7 +11,7 @@ namespace DataAccessLayer.ViewModels.Auth.Account
     {
         [Required]
         [EmailAddress]
-        public string EMail { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
