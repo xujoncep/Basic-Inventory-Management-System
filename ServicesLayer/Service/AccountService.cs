@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DataAccessLayer.IRepository.Auth;
 using DataAccessLayer.ViewModels.Auth.Account;
 using ServicesLayer.IService;
