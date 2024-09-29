@@ -5,6 +5,10 @@ using DataAccessLayer.IRepository.Auth;
 using DataAccessLayer.Repository.Auth;
 using ServicesLayer.IService.Auth;
 using ServicesLayer.Service.Auth;
+using DataAccessLayer.IRepository;
+using DataAccessLayer.Repository;
+using ServicesLayer.IService;
+using ServicesLayer.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +34,10 @@ builder.Services.AddScoped<IRoleManagementService, RoleManagementService>();
 //For User Management
 builder.Services.AddScoped<IUserManagementRepository, UserManagementRepository>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
+
+//For Product-Category
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

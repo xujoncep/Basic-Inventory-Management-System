@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace DataAccessLayer.Data
 
         public IMSDbContext(DbContextOptions<IMSDbContext> options) : base(options)
         {
-        
         }
+
+        public DbSet<Category> Category { get; set; }
     }
 }
