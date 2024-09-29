@@ -42,31 +42,5 @@ namespace ServicesLayer.Service.Auth
             return user == null ? IdentityResult.Failed(new IdentityError { Description = $"User not found" }) : await _userRepository.DeleteAsync(user);
         }
 
-        public async Task<Dictionary<string, bool>> GetUserRolesAsync(string userId)
-        {
-            var roles = await _userRepository.GetAllRolesAsync();
-            var userRoles = new Dictionary<string, bool>();
-
-            foreach (var role in roles)
-            {
-                userRoles[role.Name] = await _userRepository.IsInRoleAsync(await _userRepository.FindByIdAsync(userId), role.Name);
-            }
-
-            return userRoles;
-        }
-
-        public async Task<IdentityResult> ManageUserRolesAsync(string userId, List<RoleOfUser> roles)
-        {
-            var user = await _userRepository.FindByIdAsync(userId);
-            if (user == null) return IdentityResult.Failed(new IdentityError { Description = $"User not found" });
-
-            var currentRoles = await _userManager.GetRolesAsync(user);
-            var result = await _userRepository.RemoveFromRolesAsync(user, currentRoles);
-            if (!result.Succeeded) return result;
-
-            var selectedRoles = roles.Where(x => x.IsSelected).Select(y => y.RoleName);
-            return await _userRepository.AddToRolesAsync(user, selectedRoles);
-        }
-
     }
 }
