@@ -35,11 +35,11 @@ namespace Basic_Inventory_Management_System.Controllers
                 var data = await _catService.Create(model);
                 if (data)
                 {
-                    TempData["success"] = "Successfuly Created";
+                    TempData["success"] = "Category Successfuly Created!";
                 }
                 else
                 {
-                    TempData["failed"] = "Saved Failed";
+                    TempData["failed"] = "Saved Failed!!";
                 }
                 return RedirectToAction("Index");
             }
@@ -53,7 +53,7 @@ namespace Basic_Inventory_Management_System.Controllers
             var data = await _catService.GetCategoryById(id);
             if (data == null)
             {
-                ViewBag.ErrorMessage = "Category Not Found";
+                ViewBag.ErrorMessage = "Category Not Found!!";
                 return View("NotFound");
             }
 
@@ -71,11 +71,11 @@ namespace Basic_Inventory_Management_System.Controllers
                 var data = await _catService.Edit(model);
                 if (data)
                 {
-                    TempData["success"] = "Successfuly Updated";
+                    TempData["success"] = " Category Successfuly Updated!";
                 }
                 else
                 {
-                    TempData["failed"] = "Update Failed";
+                    TempData["failed"] = "Update Failed!!";
                 }
                 return RedirectToAction("Index");
             }

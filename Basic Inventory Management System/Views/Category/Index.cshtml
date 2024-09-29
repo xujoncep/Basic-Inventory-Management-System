@@ -78,3 +78,18 @@
 
 </div>
 
+
+@section scripts {
+
+    <script>
+
+        if ('@messageSuccess' != "") {
+            toastr["success"]("@messageSuccess", "Done");
+        }
+        else if ('@messageFailed' != "") {
+            toastr["warning"]("@messageFailed", "Error");
+        }
+
+    </script>
+
+}
