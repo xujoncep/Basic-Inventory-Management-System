@@ -13,9 +13,6 @@ namespace DataAccessLayer.IRepository.Auth
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
         Task<IdentityResult> UpdateAsync(IdentityUser user);
         Task<IdentityResult> DeleteAsync(IdentityUser user);
-        Task<IEnumerable<IdentityRole>> GetAllRolesAsync();
-        Task<bool> IsInRoleAsync(IdentityUser user, string role);
-        Task<IdentityResult> RemoveFromRolesAsync(IdentityUser user, IEnumerable<string> roles);
-        Task<IdentityResult> AddToRolesAsync(IdentityUser user, IEnumerable<string> roles);
+
     }
 }

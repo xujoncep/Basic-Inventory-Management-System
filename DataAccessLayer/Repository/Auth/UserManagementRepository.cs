@@ -27,13 +27,5 @@ namespace DataAccessLayer.Repository.Auth
 
         public async Task<IdentityResult> DeleteAsync(IdentityUser user) => await _userManager.DeleteAsync(user);
 
-        public async Task<IEnumerable<IdentityRole>> GetAllRolesAsync() => _roleManager.Roles.ToList();
-
-        public async Task<bool> IsInRoleAsync(IdentityUser user, string role) => await _userManager.IsInRoleAsync(user, role);
-
-        public async Task<IdentityResult> RemoveFromRolesAsync(IdentityUser user, IEnumerable<string> roles) => await _userManager.RemoveFromRolesAsync(user, roles);
-
-        public async Task<IdentityResult> AddToRolesAsync(IdentityUser user, IEnumerable<string> roles) => await _userManager.AddToRolesAsync(user, roles);
-
     }
 }
