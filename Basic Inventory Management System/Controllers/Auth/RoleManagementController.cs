@@ -93,5 +93,35 @@ namespace Basic_Inventory_Management_System.Controllers.Auth
             }
             return View("RoleList");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUsersInRole(string roleId)
+        {
+            ViewBag.roleId = roleId;
+            var usersInRole = await _roleService.GetUsersInRoleAsync(roleId);
+            if (usersInRole == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+            ViewBag.roleName = usersInRole.FirstOrDefault()?.UserName;
+            return View(usersInRole);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageUsersInRole(List<UserInRole> model, string roleId)
+        {
+            var result = await _roleService.ManageUsersInRoleAsync(model, roleId);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("RoleList");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+            return View(model);
+        }
     }
 }

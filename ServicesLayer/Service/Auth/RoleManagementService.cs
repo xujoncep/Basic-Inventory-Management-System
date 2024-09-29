@@ -13,10 +13,12 @@ namespace ServicesLayer.Service.Auth
     public class RoleManagementService: IRoleManagementService
     {
         private readonly IRoleManagementRepository _roleRepository;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public RoleManagementService(IRoleManagementRepository roleRepository)
+        public RoleManagementService(IRoleManagementRepository roleRepository, UserManager<IdentityUser> userManager)
         {
             _roleRepository = roleRepository;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<IdentityRole>> GetAllRolesAsync()
@@ -50,6 +52,53 @@ namespace ServicesLayer.Service.Auth
             if (role == null) return IdentityResult.Failed(new IdentityError { Description = "Role not found." });
 
             return await _roleRepository.DeleteRoleAsync(role);
+        }
+
+        public async Task<List<UserInRole>> GetUsersInRoleAsync(string roleId)
+        {
+            var role = await _roleRepository.GetRoleByIdAsync(roleId);
+            if (role == null) return null;
+
+            var usersInRole = new List<UserInRole>();
+            foreach (var user in _userManager.Users)
+            {
+                var userRole = new UserInRole
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    IsSelected = await _userManager.IsInRoleAsync(user, role.Name)
+                };
+                usersInRole.Add(userRole);
+            }
+            return usersInRole;
+        }
+
+        public async Task<IdentityResult> ManageUsersInRoleAsync(List<UserInRole> model, string roleId)
+        {
+            var role = await _roleRepository.GetRoleByIdAsync(roleId);
+            if (role == null) return IdentityResult.Failed(new IdentityError { Description = "Role not found." });
+
+            foreach (var userModel in model)
+            {
+                var user = await _userManager.FindByIdAsync(userModel.UserId);
+                IdentityResult result = null;
+
+                if (userModel.IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
+                {
+                    result = await _userManager.AddToRoleAsync(user, role.Name);
+                }
+                else if (!userModel.IsSelected && await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    result = await _userManager.RemoveFromRoleAsync(user, role.Name);
+                }
+
+                if (result != null && !result.Succeeded)
+                {
+                    return result; // Return the first failure result
+                }
+            }
+
+            return IdentityResult.Success; // Return success if all operations succeeded
         }
 
     }

@@ -16,5 +16,7 @@ namespace ServicesLayer.IService.Auth
         Task<IdentityResult> CreateRoleAsync(string roleName);
         Task<IdentityResult> UpdateRoleAsync(UserRole model);
         Task<IdentityResult> DeleteRoleAsync(string id);
+        Task<List<UserInRole>> GetUsersInRoleAsync(string roleId);
+        Task<IdentityResult> ManageUsersInRoleAsync(List<UserInRole> model, string roleId);
     }
 }
