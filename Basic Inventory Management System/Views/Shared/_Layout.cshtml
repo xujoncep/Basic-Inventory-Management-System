@@ -66,7 +66,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link fw-bolder" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                     </ul>
 
@@ -75,7 +75,7 @@
                         {
                             <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <span class="text-dark">Hello @User.Identity?.Name! </span>
+                                    <span class="text-dark fw-bolder">Hello @User.Identity?.Name! </span>
                                     <button type="submit" class="youtube-btn">Logout</button>
                                 </form>
                             </li>
@@ -83,10 +83,10 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link link-btn" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link link-btn fw-bolder" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-btn ms-2" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link link-btn ms-2 fw-bolder" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>
