@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Basic_Inventory_Management_System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/bootstrap-switch/bootstrap-switch.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/solid.min.css" integrity="sha512-/r+0SvLvMMSIf41xiuy19aNkXxI+3zb/BN8K9lnDDWI09VM0dwgTMzK7Qi5vv5macJ3VH4XZXr60ip7v13QnmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Basic_Inventory_Management_System.styles.css" asp-append-version="true" />
     <style>
@@ -74,10 +77,13 @@
                         <li class="nav-item">
                             <a class="nav-link fw-bolder" asp-area="" asp-controller="UserManagement" asp-action="UserList">User Management</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bolder" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                        </li>
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
-                        @if (SignInManager.IsSignedIn(User))
+                       @*  @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout">
@@ -85,7 +91,21 @@
                                     <button type="submit" class="youtube-btn">Logout</button>
                                 </form>
                             </li>
+                        } *@
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    @* Split the email at '@' and take the first part *@
+                                    <span class="text-dark fw-bolder">
+                                        Hello @User.Identity?.Name.Split('@')[0]!
+                                    </span>
+                                    <button type="submit" class="youtube-btn">Logout</button>
+                                </form>
+                            </li>
                         }
+
                         else
                         {
                             <li class="nav-item">
@@ -114,6 +134,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap-switch/bootstrap-switch.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
