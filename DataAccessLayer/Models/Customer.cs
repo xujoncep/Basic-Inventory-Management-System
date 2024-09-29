@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DataAccessLayer.Models
 {
@@ -20,6 +21,7 @@ namespace DataAccessLayer.Models
         public string CustomerName { get; set; }
         [Required]
         [DisplayName("Customer Code")]
+        [Remote("IsCustomerCodeExist", "Customer", AdditionalFields = "CustomerId,CustomerName", HttpMethod = "POST", ErrorMessage = "Customer Code Already Exist")]
         [StringLength(10)]
         public string CustomerCode { get; set; }
         [Required]

@@ -11,17 +11,20 @@ namespace Basic_Inventory_Management_System.Controllers
         {
             _cService = cService;
         }
+        
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var data = await _cService.GetAllCustomer();
             return View(data);
         }
+       
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Customer model)
@@ -41,6 +44,7 @@ namespace Basic_Inventory_Management_System.Controllers
             }
             return View(model);
         }
+       
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -52,6 +56,7 @@ namespace Basic_Inventory_Management_System.Controllers
             }
             return View(data);
         }
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Customer model)
@@ -70,6 +75,13 @@ namespace Basic_Inventory_Management_System.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> IsCustomerCodeExist(int CustomerId, string CustomerCode)
+        {
+            bool result = await _cService.IsCustomerCodeExist(CustomerId, CustomerCode);
+            return Json(!result);
         }
     }
 }
