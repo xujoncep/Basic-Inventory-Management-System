@@ -53,5 +53,17 @@ namespace DataAccessLayer.Repository
             }
             catch { return false; }
         }
+
+        public async Task<bool> IsCategoryExist(int CategoryId, string CategoryName)
+        {
+            if (CategoryId > 0)
+            {
+                return await _db.Category.AnyAsync(x => x.CategoryId != CategoryId && x.CategoryName == CategoryName);
+            }
+            else
+            {
+                return await _db.Category.AnyAsync(x => x.CategoryName == CategoryName);
+            }
+        }
     }
 }

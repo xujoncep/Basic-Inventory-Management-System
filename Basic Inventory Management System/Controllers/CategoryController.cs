@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
@@ -80,6 +81,13 @@ namespace Basic_Inventory_Management_System.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+        
+        [HttpPost]
+        public async Task<JsonResult> IsCategoryExist(int CategoryId, string CategoryName)
+        {
+            bool result = await _catService.IsCategoryExist(CategoryId, CategoryName);
+            return Json(!result);
         }
     }
 }

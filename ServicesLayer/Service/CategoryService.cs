@@ -40,5 +40,10 @@ namespace ServicesLayer.Service
             var data = await _catRepo.Edit(model);
             return data;
         }
+
+        public async Task<bool> IsCategoryExist(int CategoryId, string CategoryName)
+        {
+            return await _catRepo.IsCategoryExist(CategoryId, CategoryName);
+        }
     }
 }

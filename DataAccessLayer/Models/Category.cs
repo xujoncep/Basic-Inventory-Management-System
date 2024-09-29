@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DataAccessLayer.Models
 {
@@ -17,6 +18,7 @@ namespace DataAccessLayer.Models
 
         [Required]
         [DisplayName("Category Name")]
+        [Remote("IsCategoryExist", "Category", AdditionalFields = "CategoryId,CategoryName", HttpMethod = "POST", ErrorMessage = "Category Already Exist")]
         [StringLength(50)]
         public string CategoryName { get; set; }
 
