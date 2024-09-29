@@ -18,9 +18,14 @@ builder.Services.AddDbContext<IMSDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
 
-
+//For User Register and Login
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+
+
+//For User Role Management
+builder.Services.AddScoped<IRoleManagementRepository, RoleManagementRepository>();
+builder.Services.AddScoped<IRoleManagementService, RoleManagementService>();
 
 var app = builder.Build();
 
