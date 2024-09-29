@@ -36,5 +36,10 @@ namespace ServicesLayer.Service
             var data = await _sRepo.Edit(model);
             return data;
         }
+
+        public async Task<bool> IsSupplierCodeExist(int SupplierId, string SupplierCode)
+        {
+            return await _sRepo.IsSupplierCodeExist(SupplierId, SupplierCode);
+        }
     }
 }

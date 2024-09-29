@@ -71,5 +71,11 @@ namespace Basic_Inventory_Management_System.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public async Task<JsonResult> IsSupplierCodeExist(int SupplierId, string SupplierCode)
+        {
+            bool result = await _sService.IsSupplierCodeExist(SupplierId, SupplierCode);
+            return Json(!result);
+        }
     }
 }

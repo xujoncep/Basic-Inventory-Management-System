@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DataAccessLayer.Models
 {
@@ -23,6 +24,7 @@ namespace DataAccessLayer.Models
         [Required]
         [DisplayName("Supplier Code")]
         [StringLength(10)]
+        [Remote("IsSupplierCodeExist", "Supplier", AdditionalFields = "SupplierId,SupplierName", HttpMethod = "POST", ErrorMessage = "Supplier Code Already Exist")]
         public string SupplierCode { get; set; }
 
         [Required]

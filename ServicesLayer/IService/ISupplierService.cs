@@ -13,5 +13,6 @@ namespace ServicesLayer.IService
         Task<Supplier> GetSupplierById(int SupplierId);
         Task<bool> Create(Supplier model);
         Task<bool> Edit(Supplier model);
+        Task<bool> IsSupplierCodeExist(int SupplierId, string SupplierCode);
     }
 }
