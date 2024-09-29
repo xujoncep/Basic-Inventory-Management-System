@@ -31,6 +31,10 @@ namespace Basic_Inventory_Management_System.Controllers.Auth
                 var result = await _accountService.RegisterUserAsync(model);
                 if (result.Succeeded)
                 {
+                    if (_signInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
+                    {
+                        return RedirectToAction("UserList", "UserManagement");
+                    }
 
                     return RedirectToAction("Login", "Account");
                 }
