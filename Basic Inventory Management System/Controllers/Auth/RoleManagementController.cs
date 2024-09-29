@@ -1,10 +1,12 @@
 ﻿using DataAccessLayer.ViewModels.RoleManagement;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.IService.Auth;
 
 namespace Basic_Inventory_Management_System.Controllers.Auth
 {
+    [Authorize(Roles = "Admin")]
     public class RoleManagementController : Controller
     {
         private readonly IRoleManagementService _roleService;

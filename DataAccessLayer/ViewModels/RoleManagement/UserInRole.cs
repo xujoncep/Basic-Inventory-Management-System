@@ -9,7 +9,6 @@ namespace DataAccessLayer.ViewModels.RoleManagement
 {
     public class UserInRole
     {
-        [Required(ErrorMessage = "User id is required.")]
         public string UserId { get; set; }
 
         [Required(ErrorMessage = "User name is required.")]

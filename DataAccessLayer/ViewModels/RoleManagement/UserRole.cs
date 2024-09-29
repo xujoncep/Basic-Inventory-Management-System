@@ -9,7 +9,7 @@ namespace DataAccessLayer.ViewModels.RoleManagement
 {
     public class UserRole
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required(ErrorMessage = "Role Name is required")]
         [Display(Name = "Role Name")]
