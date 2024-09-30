@@ -12,25 +12,27 @@ namespace ServicesLayer.Service
 {
     public class SalesService: ISalesService
     {
-        private readonly ISalesRepository _sRepo;
+       
+       
+            private readonly ISalesRepository _sRepo;
 
-        public SalesService(ISalesRepository sRepo)
-        {
-            _sRepo = sRepo;
-        }
+            public SalesService(ISalesRepository sRepo)
+            {
+                _sRepo = sRepo;
+            }
 
-        public async Task<List<SalesOrderVM>> GetAllSalesOrder()
-        {
-            return await _sRepo.GetAllSalesOrder();
-        }
-        public async Task<bool> Create(SalesOrder model)
-        {
-            return await _sRepo.Create(model);
-        }
+            public async Task<List<SalesOrderVM>> GetAllSalesOrder()
+            {
+                return await _sRepo.GetAllSalesOrder();
+            }
+            public async Task<bool> Create(SalesOrder model)
+            {
+                return await _sRepo.Create(model);
+            }
 
-        public async Task<int> GetAvailableQuantityByProductId(int productId)
-        {
-            return await _sRepo.GetAvailableQuantityByProductId(productId);
-        }
-    }
+            public async Task<int> GetAvailableQuantityByProductId(int productId)
+            {
+                return await _sRepo.GetAvailableQuantityByProductId(productId);
+            }
+     }
 }

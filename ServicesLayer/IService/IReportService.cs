@@ -11,5 +11,7 @@ namespace ServicesLayer.IService
     {
         Task<TotalItemVM> GetTotalItemCount();
         Task<InventoryReportVM> GetInventoryReport(InventoryReportVM model);
+        Task<PurchaseReportVM> GetPurchaseReport(PurchaseReportVM model);
+        Task<SalesReportVM> GetSalesReport(SalesReportVM model);
     }
 }

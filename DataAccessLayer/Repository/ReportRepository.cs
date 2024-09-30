@@ -72,5 +72,106 @@ namespace DataAccessLayer.Repository
 
             return model;
         }
+
+
+        public async Task<PurchaseReportVM> GetPurchaseReport(PurchaseReportVM model)
+        {
+            var query = (from po in _db.PurchaseOrder
+                         join pr in _db.Product on po.ProductId equals pr.ProductId
+                         join s in _db.Supplier on po.SupplierId equals s.SupplierId into posGroup
+                         from s in posGroup.DefaultIfEmpty()
+                         select new PurchaseOrderVM
+                         {
+                             PurchaseOrderId = po.PurchaseOrderId,
+                             ProductId = po.ProductId,
+                             ProductName = pr.ProductName,
+                             SupplierId = po.SupplierId,
+                             SupplierName = s.SupplierName,
+                             Quantity = po.Quantity,
+                             PurchasePrice = po.PurchasePrice,
+                             PurchaseDate = po.PurchaseDate,
+                             TotalPrice = po.Quantity * po.PurchasePrice
+                         });
+
+
+
+            if (model.ProductId > 0)
+            {
+                query = query.Where(x => x.ProductId == model.ProductId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.SupplierName))
+            {
+                query = query.Where(x => x.SupplierName.Contains(model.SupplierName.Trim()));
+            }
+
+            if (model.StartDate != null)
+            {
+                query = query.Where(x => x.PurchaseDate >= model.StartDate);
+            }
+            if (model.EndDate != null)
+            {
+                query = query.Where(x => x.PurchaseDate <= model.EndDate);
+            }
+
+            var data = await query.ToListAsync();
+
+            model.PurchaseOrderList = data;
+            model.TotalQuantity = data.Sum(x => x.Quantity);
+            model.GrandTotalPrice = data.Sum(x => x.TotalPrice);
+
+            return model;
+        }
+
+
+
+        public async Task<SalesReportVM> GetSalesReport(SalesReportVM model)
+        {
+            var query = (from so in _db.SalesOrder
+                         join pr in _db.Product on so.ProductId equals pr.ProductId
+                         join c in _db.Customer on so.CustomerId equals c.CustomerId into socGroup
+                         from c in socGroup.DefaultIfEmpty()
+                         select new SalesOrderVM
+                         {
+                             SalesOrderId = so.SalesOrderId,
+                             ProductId = so.ProductId,
+                             ProductName = pr.ProductName,
+                             CustomerId = so.CustomerId,
+                             CustomerName = c.CustomerName,
+                             Quantity = so.Quantity,
+                             SalePrice = so.SalePrice,
+                             SaleDate = so.SaleDate,
+                             TotalPrice = so.Quantity * so.SalePrice
+                         });
+
+
+
+            if (model.ProductId > 0)
+            {
+                query = query.Where(x => x.ProductId == model.ProductId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.CustomerName))
+            {
+                query = query.Where(x => x.CustomerName.Contains(model.CustomerName.Trim()));
+            }
+
+            if (model.StartDate != null)
+            {
+                query = query.Where(x => x.SaleDate >= model.StartDate);
+            }
+            if (model.EndDate != null)
+            {
+                query = query.Where(x => x.SaleDate <= model.EndDate);
+            }
+
+            var data = await query.ToListAsync();
+
+            model.SalesOrderList = data;
+            model.TotalQuantity = data.Sum(x => x.Quantity);
+            model.GrandTotalPrice = data.Sum(x => x.TotalPrice);
+
+            return model;
+        }
     }
 }

@@ -1,0 +1,184 @@
+﻿@model DataAccessLayer.ViewModels.PurchaseReportVM
+@{
+    ViewData["Title"] = "Purchase";
+    bool ShowResult = ViewBag.ShowResult;
+}
+<form asp-action="Purchase">
+    <div class="card my-2 row col-lg-8 mx-auto">
+        <div class="card-header">
+            <h3 class="text-center">Search Purchase Order Report</h3>
+        </div>
+        <div class="card-body">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="StartDate" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="StartDate" class="form-control" type="date" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="EndDate" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="EndDate" class="form-control" type="date" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="ProductId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("ProductId", new SelectList(Model.ProductDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="SupplierName" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="SupplierName" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end mt-2">
+                <a asp-action="Purchase" asp-controller="Report" class="btn btn-secondary btn-sm">Clear</a>
+                <input type="submit" value="Search" class="btn btn-success btn-sm ms-2" />
+            </div>
+
+
+        </div>
+    </div>
+
+    @if (ShowResult)
+    {
+
+        <div class="card m-4">
+            <div class="card-header">
+                <h2 class="alert alert-success text-center">Purchase Order Report</h2>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success" formaction="/Report/DownloadPurchase">
+                            <i class="fa-regular fa-file-excel"></i> Download
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        Total Quantity : @Model.TotalQuantity
+                    </div>
+                    <div class="col-auto">
+                        Grand Total Price : @Model.GrandTotalPrice
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered  @(Model.PurchaseOrderList.Any()?"dataTable":"")">
+                    <thead class="table-success">
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Purchase Date
+                            </th>
+                            <th>
+                                Product Name
+                            </th>
+                            <th>
+                                Supplier Name
+                            </th>
+                            <th>
+                                Purchase Price
+                            </th>
+                            <th>
+                                Quantity
+                            </th>
+                            <th>
+                                Total Price
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.PurchaseOrderList.Any())
+                        {
+                            int sl = 1;
+                            @foreach (var item in Model.PurchaseOrderList)
+                            {
+                                <tr>
+                                    <td>
+                                        @(sl++)
+                                    </td>
+                                    <td>
+                                        @item.PurchaseDate.ToString("dd/MMM/yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.SupplierName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.PurchasePrice)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(x => item.TotalPrice)
+                                    </td>
+
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td align="center" colspan="7">No Data Found !</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    }
+
+</form>
+
+
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('.dataTable').DataTable();
+        });
+    </script>
+
+}
