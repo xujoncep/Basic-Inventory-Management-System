@@ -18,5 +18,7 @@ namespace DataAccessLayer.IRepository
 
         Task<IEnumerable<SelectListItem>> GetProductDDL();
         Task<IEnumerable<SelectListItem>> GetActiveProductDDL();
+
+        Task<IEnumerable<SelectListItem>> GetAvailableProductDDL();
     }
 }

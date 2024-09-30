@@ -101,5 +101,17 @@ namespace DataAccessLayer.Repository
             return datas.OrderBy(x => x.Text).ToList();
         }
 
+        public async Task<IEnumerable<SelectListItem>> GetAvailableProductDDL()
+        {
+            IEnumerable<SelectListItem> datas = await _db.Product.Where(x => x.IsActive == 1 && x.QuantityInStock > 0)
+              .Select(s => new SelectListItem
+              {
+                  Value = s.ProductId.ToString(),
+                  Text = s.ProductName.ToString()
+              }).Distinct().ToListAsync();
+
+            return datas.OrderBy(x => x.Text).ToList();
+        }
+
     }
 }

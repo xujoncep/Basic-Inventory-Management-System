@@ -13,5 +13,6 @@ namespace ServicesLayer.IService
         Task<IEnumerable<SelectListItem>> GetSupplierDDL(int supplierId = 0);
         Task<IEnumerable<SelectListItem>> GetCustomerDDL(int customerId = 0);
         Task<IEnumerable<SelectListItem>> GetProductDDL(bool IsActive = true);
+        Task<IEnumerable<SelectListItem>> GetAvailableProductDDL();
     }
 }
