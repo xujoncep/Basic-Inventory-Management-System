@@ -13,11 +13,13 @@
     }
     TempData.Clear();
 }
+
+
 <div class="card m-4">
     <div class="card-header">
         <h2 class="alert alert-success text-center">Product List</h2>
         <div class="d-flex justify-content-end">
-            <a asp-action="Create" class="btn" style="background-color:#57F35A;"><i class="fa-solid fa-plus"></i> Add New</a>
+            <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add New</a>
         </div>
     </div>
     <div class="card-body">
@@ -28,22 +30,23 @@
                         Action
                     </th>
                     <th>
-                    @Html.DisplayNameFor(x => x.ProductName)
+                        @Html.DisplayNameFor(x => x.ProductName)
                     </th>
                     <th>
-                    @Html.DisplayNameFor(x => x.CategoryName)
+                        @Html.DisplayNameFor(x => x.CategoryName)
                     </th>
                     <th>
-                    @Html.DisplayNameFor(x => x.BasePrice)
+                        @Html.DisplayNameFor(x => x.BasePrice)
                     </th>
                     <th>
-                    @Html.DisplayNameFor(x => x.QuantityInStock)
+                        @Html.DisplayNameFor(x => x.QuantityInStock)
                     </th>
                     <th>
-                    @Html.DisplayNameFor(x => x.IsActive)
+                        @Html.DisplayNameFor(x => x.IsActive)
                     </th>
                 </tr>
             </thead>
+
             <tbody>
                 @if (Model.Any())
                 {
@@ -77,6 +80,7 @@
                                     <span class="badge bg-danger">No</span>
                                 }
                             </td>
+
                         </tr>
                     }
                 }
@@ -89,19 +93,27 @@
             </tbody>
         </table>
     </div>
+
 </div>
 
 
+
+
+
 @section scripts {
+
     <script>
+
         if ('@messageSuccess' != "") {
             toastr["success"]("@messageSuccess", "Done");
         }
         else if ('@messageFailed' != "") {
             toastr["warning"]("@messageFailed", "Error");
         }
+
         $(document).ready(function () {
             $('.dataTable').DataTable();
         });
     </script>
+
 }

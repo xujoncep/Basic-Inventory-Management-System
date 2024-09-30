@@ -33,7 +33,7 @@ namespace Basic_Inventory_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var data = await _productService.Create(model);
                 if (data)
