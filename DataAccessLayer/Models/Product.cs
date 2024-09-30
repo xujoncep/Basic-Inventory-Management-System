@@ -42,7 +42,9 @@ namespace DataAccessLayer.Models
         
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
-       
+        public virtual List<PurchaseOrder> PurchaseOrders { get; set; } = new List<PurchaseOrder>();
+        public virtual List<SalesOrder> SalesOrders { get; set; } = new List<SalesOrder>();
+
         [NotMapped]
         public IEnumerable<SelectListItem> CategoryDDL { get; set; }
 

@@ -32,5 +32,7 @@ namespace DataAccessLayer.Models
         /// For 1=Active,  0=InActive
         [Required]
         public int IsActive { get; set; }
+
+        public virtual List<SalesOrder> SalesOrders { get; set; } = new List<SalesOrder>();
     }
 }
