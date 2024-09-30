@@ -47,6 +47,14 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+//For Product
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+//For Dropdown List
+builder.Services.AddScoped<IDDLRepository, DDLRepository>();
+builder.Services.AddScoped<IDDLService, DDLService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
