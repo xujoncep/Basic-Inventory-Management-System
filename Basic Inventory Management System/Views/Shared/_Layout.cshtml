@@ -35,17 +35,17 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdownMenuLink"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#57F35A;">
-                                    Manage
+                                    Manage Access
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="UserManagement"
+                                    <a class="dropdown-item fw-bolder" asp-controller="UserManagement"
                                        asp-action="UserList" style="color:#57F35A;">Users</a>
-                                    <a class="dropdown-item" asp-controller="RoleManagement"
+                                    <a class="dropdown-item fw-bolder" asp-controller="RoleManagement"
                                        asp-action="RoleList" style="color:#57F35A;">Roles</a>
                                 </div>
                             </li>
                         }
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                       @*  @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdownMenuLink"
@@ -57,21 +57,21 @@
                                        asp-action="UserList" style="color:#57F35A;">Users</a>
                                 </div>
                             </li>
-                        }
+                        } *@
 
                         @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin")))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdownMenuLink"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#57F35A;">
-                                    Master
+                                    Master Control
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Category"
+                                    <a class="dropdown-item fw-bolder" asp-controller="Category"
                                        asp-action="Index" style="color:#57F35A;">Category</a>
-                                    <a class="dropdown-item" asp-controller="Supplier"
+                                    <a class="dropdown-item fw-bolder" asp-controller="Supplier"
                                        asp-action="Index" style="color:#57F35A;">Supplier</a>
-                                    <a class="dropdown-item" asp-controller="Customer"
+                                    <a class="dropdown-item fw-bolder" asp-controller="Customer"
                                        asp-action="Index" style="color:#57F35A;">Customer</a>
                                 </div>
                             </li>

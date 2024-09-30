@@ -2,76 +2,86 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="card m-4">
-    <div class="card-header">
-        <h2 class="alert alert-success text-center">Basic Inventory Management System</h2>
+
+<div class="card m-4 shadow-lg">
+    <div class="card-header fw-bolder" style="background-color:#57F35A;">
+        <h2 class="text-center mb-0">Basic Inventory Management System</h2>
     </div>
-    <div class="card-body row">
-        <div class="row">
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalCategory)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalCategory</h1>
-                    <a asp-action="Index" asp-controller="Category" class="btn btn-outline-success">View Details</a>
-                </div>
-
-            </div>
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalSupplier)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalSupplier</h1>
-                    <a asp-action="Index" asp-controller="Supplier" class="btn btn-outline-success">View Details</a>
+    <div class="card-body fw-bolder">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalCategory)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalCategory</h1>
+                        <a asp-action="Index" asp-controller="Category" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
                 </div>
             </div>
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalCustomer)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalCustomer</h1>
-                    <a asp-action="Index" asp-controller="Customer" class="btn btn-outline-success">View Details</a>
-                </div>
 
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalSupplier)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalSupplier</h1>
+                        <a asp-action="Index" asp-controller="Supplier" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalCustomer)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalCustomer</h1>
+                        <a asp-action="Index" asp-controller="Customer" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalProduct)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalProduct</h1>
-                    <a asp-action="Index" asp-controller="Product" class="btn btn-outline-success">View Details</a>
-                </div>
-
-            </div>
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalPurchaseOrder)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalPurchaseOrder</h1>
-                    <a asp-action="Index" asp-controller="Purchase" class="btn btn-outline-success">View Details</a>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalProduct)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalProduct</h1>
+                        <a asp-action="Index" asp-controller="Product" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
                 </div>
             </div>
-            <div class="card col text-center m-2">
-                <div class="card-header">
-                    <h4>@Html.DisplayNameFor(x => x.TotalSalesOrder)</h4>
-                </div>
-                <div class="card-body">
-                    <h1>@Model.TotalSalesOrder</h1>
-                    <a asp-action="Index" asp-controller="Sales" class="btn btn-outline-success">View Details</a>
-                </div>
 
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalPurchaseOrder)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalPurchaseOrder</h1>
+                        <a asp-action="Index" asp-controller="Purchase" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
+                </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4>@Html.DisplayNameFor(x => x.TotalSalesOrder)</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1>@Model.TotalSalesOrder</h1>
+                        <a asp-action="Index" asp-controller="Sales" class="btn btn-outline-success mt-3">View Details</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>
