@@ -1,0 +1,50 @@
+﻿//dbdiagram.com
+
+Table SalesOrder {
+  SalesOrderId int [primary key]
+  ProductId int [ref: > Product.ProductId]
+  CustomerId int [ref: > Customer.CustomerId]
+  Quantity int
+  SalePrice decimal
+  SaleDate date
+}
+
+Table Customer {
+  CustomerId int [primary key]
+  CustomerName varchar
+  CustomerCode varchar
+  ContactInfo varchar
+  IsActive bit
+}
+
+Table Product {
+  ProductId int [primary key]
+  ProductName varchar
+  CategoryId int [ref: > Category.CategoryId]
+  BasePrice decimal
+  QuantityInStock int
+  IsActive bit
+}
+
+Table Category {
+  CategoryId int [primary key]
+  CategoryName varchar
+  IsActive bit
+}
+
+Table Supplier{
+  SupplierId int [primary key]
+  SupplierName varchar
+  SupplierCode int [ref: > Category.CategoryId]
+  ContactInfo text
+  IsActive bit
+}
+
+Table PurchaseOrder {
+  PurchaseId int [primary key]
+  ProductId int [ref: > Product.ProductId]
+  SupplierId int [ref: > Supplier.SupplierId]
+  Quantity int
+  PurchasePrice decimal
+  PurchaseDate date
+}
