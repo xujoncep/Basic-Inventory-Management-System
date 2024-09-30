@@ -27,5 +27,15 @@ namespace ServicesLayer.Service
         {
             return await _rRepo.GetInventoryReport(model);
         }
+
+        public async Task<PurchaseReportVM> GetPurchaseReport(PurchaseReportVM model)
+        {
+            return await _rRepo.GetPurchaseReport(model);
+        }
+
+        public async Task<SalesReportVM> GetSalesReport(SalesReportVM model)
+        {
+            return await _rRepo.GetSalesReport(model);
+        }
     }
 }
