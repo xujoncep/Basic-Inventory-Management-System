@@ -30,6 +30,7 @@ namespace DataAccessLayer.Models
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         [DisplayName("Base Price")]
+        [Range(0.01, 999999999999999.99)]
         public decimal BasePrice { get; set; }
         
         [Required]
@@ -42,7 +43,9 @@ namespace DataAccessLayer.Models
         
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
-       
+        public virtual List<PurchaseOrder> PurchaseOrders { get; set; } = new List<PurchaseOrder>();
+        public virtual List<SalesOrder> SalesOrders { get; set; } = new List<SalesOrder>();
+
         [NotMapped]
         public IEnumerable<SelectListItem> CategoryDDL { get; set; }
 

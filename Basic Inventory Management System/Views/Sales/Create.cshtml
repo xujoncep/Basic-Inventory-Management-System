@@ -1,0 +1,138 @@
+﻿@model DataAccessLayer.Models.SalesOrder
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="card my-2 row col-lg-8 mx-auto">
+    <div class="card-header">
+        <h3>Add New Sales Order</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="SaleDate" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="SaleDate" class="form-control" type="date" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="SaleDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="ProductId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("ProductId", new SelectList(Model.ProductDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="CustomerId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("CustomerId", new SelectList(Model.CustomerDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="SalePrice" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="SalePrice" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="SalePrice" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="Quantity" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Quantity" class="form-control" />
+                    <span id="quantityError" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="d-flex justify-content-end mt-2">
+                <input type="submit" value="Save Data" class="btn btn-success btn-sm" />
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-start">
+            <a asp-action="Index" class="btn btn-link btn-sm text-decoration-none"><i class="fa-solid fa-arrow-left"></i> Back to List</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#ProductId').change(function () {
+                var productId = $(this).val();
+
+                if (productId) {
+                    $.ajax({
+                        url: '@Url.Action("GetAvailableQuantityByProductId", "Sales")',
+                        type: 'GET',
+                        data: { productId: productId },
+                        success: function (data) {
+                            $('#Quantity').attr('max', data);
+
+                            $('#quantityError').text('');
+
+                            if ($('#Quantity').val() > data) {
+                                $('#Quantity').val(data);
+                            }
+                        },
+                        error: function () {
+                            alert('Error fetching available quantity.');
+                        }
+                    });
+                } else {
+                    $('#Quantity').attr('max', '');
+                    $('#quantityError').text('');
+                }
+            });
+
+            $('#Quantity').on('input change', function () {
+                var maxQuantity = parseInt($(this).attr('max'));
+                var enteredQuantity = parseInt($(this).val());
+
+                if (enteredQuantity > maxQuantity) {
+                    $(this).val(maxQuantity);
+                    $('#quantityError').text('Maximum quantity available in stock is ' + maxQuantity);
+                } else {
+                    $('#quantityError').text('');
+                }
+            });
+        });
+    </script>
+}
+
+
