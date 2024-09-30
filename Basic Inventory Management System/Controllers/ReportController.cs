@@ -1,10 +1,12 @@
 ﻿using ClosedXML.Excel;
 using DataAccessLayer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.IService;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         

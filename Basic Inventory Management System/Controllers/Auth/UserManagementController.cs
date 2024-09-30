@@ -7,7 +7,7 @@ using ServicesLayer.IService.Auth;
 namespace Basic_Inventory_Management_System.Controllers.Auth
 {
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserManagementController : Controller
     {
         private readonly IUserManagementService _userService;

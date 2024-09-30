@@ -1,9 +1,11 @@
 ﻿using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.IService;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _cService;

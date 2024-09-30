@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesLayer.IService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Basic_Inventory_Management_System.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         ICategoryService _catService;
