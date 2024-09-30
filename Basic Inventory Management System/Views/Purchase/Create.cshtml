@@ -1,0 +1,89 @@
+﻿@model DataAccessLayer.Models.PurchaseOrder
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="card my-2 row col-lg-8 mx-auto">
+    <div class="card-header">
+        <h3>Add New Purchase Order</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="PurchaseDate" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="PurchaseDate" class="form-control" type="date" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="ProductId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("ProductId", new SelectList(Model.ProductDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="SupplierId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("SupplierId", new SelectList(Model.SupplierDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="PurchasePrice" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="PurchasePrice" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="Quantity" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="Quantity" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="d-flex justify-content-end mt-2">
+                <input type="submit" value="Save Data" class="btn btn-success btn-sm" />
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-start">
+            <a asp-action="Index" class="btn btn-link btn-sm text-decoration-none"><i class="fa-solid fa-arrow-left"></i> Back to List</a>
+        </div>
+    </div>
+
+</div>
+

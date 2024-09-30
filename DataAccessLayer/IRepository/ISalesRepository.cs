@@ -12,6 +12,6 @@ namespace DataAccessLayer.IRepository
     {
         Task<List<SalesOrderVM>> GetAllSalesOrder();
         Task<bool> Create(SalesOrder model);
-        //Task<int> GetAvailableQuantityByProductId(int productId);
+        Task<int> GetAvailableQuantityByProductId(int productId);
     }
 }

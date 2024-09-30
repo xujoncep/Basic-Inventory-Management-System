@@ -1,0 +1,122 @@
+﻿@model IEnumerable<DataAccessLayer.ViewModels.SalesOrderVM>
+@{
+    ViewData["Title"] = "Index";
+    string messageSuccess = "";
+    string messageFailed = "";
+    if (TempData["success"] != null)
+    {
+        messageSuccess = TempData["success"].ToString();
+    }
+    else if (TempData["failed"] != null)
+    {
+        messageFailed = TempData["failed"].ToString();
+    }
+    TempData.Clear();
+}
+
+
+<div class="card m-4">
+    <div class="card-header">
+        <h2 class="alert alert-success text-center">Sales Order List</h2>
+        <div class="d-flex justify-content-end">
+            <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add New</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-bordered dataTable">
+            <thead class="table-success">
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.SaleDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.SalePrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(x => x.TotalPrice)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Any())
+                {
+                    int sl = 1;
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(sl++)
+                            </td>
+                            <td>
+                                @item.SaleDate.ToString("dd/MMM/yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => item.SalePrice)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(x => item.TotalPrice)
+                            </td>
+
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td align="center" colspan="7">No Data Found !</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+@section scripts {
+
+    <script>
+
+        if ('@messageSuccess' != "") {
+            toastr["success"]("@messageSuccess", "Done");
+        }
+        else if ('@messageFailed' != "") {
+            toastr["warning"]("@messageFailed", "Error");
+        }
+
+        $(document).ready(function () {
+            $('.dataTable').DataTable();
+        });
+    </script>
+
+}
+
+
+

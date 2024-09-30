@@ -40,7 +40,7 @@ namespace Basic_Inventory_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SalesOrder model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var data = await _salesService.Create(model);
                 if (data)
@@ -59,11 +59,11 @@ namespace Basic_Inventory_Management_System.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<JsonResult> GetAvailableQuantityByProductId(int productId)
-        //{
-        //    var availableQuantity = await _salesService.GetAvailableQuantityByProductId(productId);
-        //    return Json(availableQuantity);
-        //}
+        [HttpGet]
+        public async Task<JsonResult> GetAvailableQuantityByProductId(int productId)
+        {
+            var availableQuantity = await _salesService.GetAvailableQuantityByProductId(productId);
+            return Json(availableQuantity);
+        }
     }
 }

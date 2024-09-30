@@ -28,9 +28,9 @@ namespace ServicesLayer.Service
             return await _sRepo.Create(model);
         }
 
-        //public async Task<int> GetAvailableQuantityByProductId(int productId)
-        //{
-        //    return await _sRepo.GetAvailableQuantityByProductId(productId);
-        //}
+        public async Task<int> GetAvailableQuantityByProductId(int productId)
+        {
+            return await _sRepo.GetAvailableQuantityByProductId(productId);
+        }
     }
 }
