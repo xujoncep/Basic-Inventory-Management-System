@@ -1,0 +1,155 @@
+﻿@model DataAccessLayer.ViewModels.InventoryReportVM
+@{
+    ViewData["Title"] = "Inventory";
+    bool ShowResult = ViewBag.ShowResult;
+}
+<form asp-action="Inventory">
+    <div class="card my-2 row col-lg-8 mx-auto">
+        <div class="card-header">
+            <h3 class="text-center">Search Inventory Status Report</h3>
+        </div>
+        <div class="card-body">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="ProductName" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    <input asp-for="ProductName" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2 fw-semibold">
+                    <label asp-for="CategoryId" class="col-form-label"></label>
+                </div>
+                <div class="col-6">
+                    @Html.DropDownList("CategoryId", new SelectList(Model.CategoryDDL, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-2">
+                <a asp-action="Inventory" asp-controller="Report" class="btn btn-secondary btn-sm">Clear</a>
+                <input type="submit" value="Search" class="btn btn-success btn-sm ms-2" />
+            </div>
+
+
+        </div>
+    </div>
+
+    @if (ShowResult)
+    {
+
+        <div class="card m-4">
+            <div class="card-header">
+                <h2 class="alert alert-success text-center">Inventory Status Report</h2>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success" formaction="/Report/DownloadInventory">
+                            <i class="fa-regular fa-file-excel"></i> Download
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        Total Quantity : @Model.TotalQuantity
+                    </div>
+                    <div class="col-auto">
+                        Grand Total Price : @Model.GrandTotalPrice
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered dataTable">
+                    <thead class="table-success">
+                        <tr>
+
+                            <th>
+                                ProductName
+                            </th>
+                            <th>
+                                CategoryName
+                            </th>
+                            <th>
+                                BasePrice
+                            </th>
+                            <th>
+                                QuantityInStock
+                            </th>
+                            <th>
+                                Total Price
+                            </th>
+                            <th>
+                                IsActive
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.ProductList.Any())
+                        {
+                            @foreach (var item in Model.ProductList)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(x => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.CategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.BasePrice)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.QuantityInStock)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => item.TotalPrice)
+                                    </td>
+                                    <td>
+                                        @if (item.IsActive == 1)
+                                        {
+                                            <span class="badge bg-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">No</span>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td align="center" colspan="6">No Data Found !</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    }
+
+</form>
+
+
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('.dataTable').DataTable();
+        });
+    </script>
+
+}
