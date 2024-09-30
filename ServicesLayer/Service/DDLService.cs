@@ -50,5 +50,17 @@ namespace ServicesLayer.Service
             }
         }
 
+        public async Task<IEnumerable<SelectListItem>> GetProductDDL(bool IsActive = true)
+        {
+            if (IsActive)
+            {
+                return await _ddlRepo.GetActiveProductDDL();
+            }
+            else
+            {
+                return await _ddlRepo.GetProductDDL();
+            }
+        }
+
     }
 }
