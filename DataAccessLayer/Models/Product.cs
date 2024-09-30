@@ -45,5 +45,9 @@ namespace DataAccessLayer.Models
        
         [NotMapped]
         public IEnumerable<SelectListItem> CategoryDDL { get; set; }
+
+        [NotMapped]
+        [DisplayName("Category Name")]
+        public string CategoryName { get; set; }
     }
 }
